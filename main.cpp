@@ -38,26 +38,33 @@ int main()
 
     //============= New Stuff =================//
 
+    // initialisation stuff
     int numIters = 100;
     int np = 3;
     Vector3f pan_dir(0, (const float)M_PI/4.f, (const float)M_PI/2.f);
 
-    /* // details
-    cout    << "Pan:" << endl
-            << pan_dir << endl
-            << "SIN:" << endl << pan_dir.array().sin() << endl
-            << "COS:" << endl << pan_dir.array().cos();
-
-    */
-
-    MatrixXf projmat = MatrixXf::Zero(3,2);
-    MatrixXf panmat = MatrixXf::Zero(3,2);
+    MatrixXf projmat(3,2);
+    MatrixXf panmat(3,2);
     projmat << pan_dir.array().sin(), -(pan_dir.array().cos());
     panmat << pan_dir.array().cos(), pan_dir.array().sin();
 
-    MatrixXf k = MatrixXf::Zero(3,3);
-    k = panmat.transpose() * projmat;
-    cout << k;
+    MatrixXf k1(3,3);
+    MatrixXf kAbs(3,3);
+    k1 = panmat * projmat.transpose();
+    kAbs << k1.cwiseAbs();
+
+    MatrixXf pimat(3,3);
+
+    /*
+     * pimat = pseudo inverse of projmat
+     * read wav
+     * perform fft as before
+     *
+     *
+     * */
+
+
+
 
     return 0;
 
