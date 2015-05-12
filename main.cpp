@@ -1,4 +1,5 @@
 #include <iostream>
+#include <complex>
 #include "eigen-eigen-10219c95fe65/Eigen/Eigen"
 
 using namespace Eigen;
@@ -18,8 +19,8 @@ int main()
     projmat << pan_dir.array().sin(), -(pan_dir.array().cos());
     panmat << pan_dir.array().cos(), pan_dir.array().sin();
 
-    cout << "projmat =\n" << projmat << endl;
-    cout << "panmat =\n" << panmat << endl;
+    //cout << "projmat =\n" << projmat << endl;
+    //cout << "panmat =\n" << panmat << endl;
 
     MatrixXf k1(3,3);
     MatrixXf kAbs(3,3);
@@ -30,7 +31,13 @@ int main()
     MatrixXf pimat(3,2);
     Matrix3f ident = Matrix3f::Identity(3,3);
     pimat = projmat.fullPivHouseholderQr().solve(ident);
-    cout << "pimat = \n" << pimat << endl;
+    //cout << "pimat = \n" << pimat << endl;
+
+    std::complex<float> floats[5] = {{0,1}, {1,2}, {2,3}};
+    cout << floats[0] << endl;
+
+    floats[3] = 2;
+
     /*
      * void pinv( MatrixType& pinvmat) const
    {
